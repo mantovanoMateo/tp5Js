@@ -1,0 +1,17 @@
+.buttonsOnAcordionBody{
+    display: inline-block;
+    padding-left: 560px;
+}
+
+table{
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+form{
+    margin: 50px;
+}
+
+.confirmationOrNegationParagraph{
+    text-align: center;
+}
