@@ -219,6 +219,34 @@ function loadTableEmployee(data){
   return tableBody;
 }
 
+async function showEmployeesAsync(){
+
+  let oldTable=document.getElementById('dataTable');
+  if(oldTable!=null){oldTable.remove();}
+
+  let daddy=document.getElementById('tableDaddy');
+
+  let newTable=document.createElement('table');
+  newTable.className='table table-striped';
+  newTable.id='dataTable';
+  newTable.innerHTML=`
+  <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Company</th>
+    </tr>
+  </thead>
+  `
+let response= await apiInteraction('GET',"https://utn-lubnan-api-1.herokuapp.com/api/Employee",null)
+
+  newTable.appendChild(loadTableEmployee(response));
+  daddy.appendChild(newTable);
+
+}
+
 // esta funcion nos permitira cargar las companias
 function showCompanies(){
 
