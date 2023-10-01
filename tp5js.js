@@ -219,6 +219,22 @@ function loadTableEmployee(data){
   return tableBody;
 }
 
+function loadTableEmployeeAsync(data,dataCompany){
+  let tableBody=document.createElement('tbody');
+  data.forEach(employee => {
+      tableBody.innerHTML+=`
+      <tr>
+      <th scope="row">${employee.employeeId}</th>
+      <td>${employee.firstName}</td>
+      <td>${employee.lastName}</td>
+      <td>${employee.email}</td>
+      <td>${dataCompany[employee.companyId-1].name}</td>
+      </tr> 
+      `
+  });
+  return tableBody;
+}
+
 async function showEmployeesAsync(){
 
   let oldTable=document.getElementById('dataTable');
@@ -240,9 +256,11 @@ async function showEmployeesAsync(){
     </tr>
   </thead>
   `
+  
+let companies= await apiInteraction('GET',"https://utn-lubnan-api-1.herokuapp.com/api/Company",null);
 let response= await apiInteraction('GET',"https://utn-lubnan-api-1.herokuapp.com/api/Employee",null)
 
-  newTable.appendChild(loadTableEmployee(response));
+  newTable.appendChild(loadTableEmployeeAsync(response,companies));
   daddy.appendChild(newTable);
 
 }
